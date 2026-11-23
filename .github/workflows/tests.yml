@@ -14,11 +14,15 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         python-version: ["3.9", "3.10", "3.11", "3.12"]
+        exclude:
+          # GitHub's current Ubuntu image has no Python 3.9; 3.9 is tested on Windows and macOS
+          - os: ubuntu-latest
+            python-version: "3.9"
     env:
       MPLBACKEND: Agg
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install the package with test and plot extras
@@ -28,12 +32,12 @@ jobs:
 
   minimum-versions:
     name: oldest supported dependencies
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     env:
       MPLBACKEND: Agg
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.9"
       - name: Install the lowest dependency versions allowed by pyproject.toml
