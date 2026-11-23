@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "imf-polarity: daily toward/away polarity of the interplanetary magnetic field from hourly OMNI2 data"
+type: software
+version: 1.0.2
+date-released: 2026-11-23
+doi: 10.5281/zenodo.24443175
+license: MIT
+repository-code: "https://github.com/amrthabit2000-bot/imf-polarity"
+
+authors:
+  - family-names: Thabet
+    given-names: Amr
+    orcid: "https://orcid.org/0000-0003-3850-4936"
+
+references:
+  - type: article
+    authors:
+      - family-names: King
+        given-names: J. H.
+      - family-names: Papitashvili
+        given-names: N. E.
+    title: "Solar wind spatial scales in and comparisons of hourly Wind and ACE plasma and magnetic field data"
+    journal: "Journal of Geophysical Research: Space Physics"
+    volume: 110
+    issue: A2
+    year: 2005
+    doi: 10.1029/2004JA010649

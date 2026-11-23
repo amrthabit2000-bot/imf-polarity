@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "imf-polarity"
+version = "1.0.2"
+description = "Daily toward/away polarity of the interplanetary magnetic field from hourly OMNI2 data"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "Amr Thabet"}]
+requires-python = ">=3.9"
+dependencies = ["numpy>=1.23", "pandas>=1.5", "requests>=2.25", "openpyxl>=3.1"]
+keywords = ["interplanetary magnetic field", "sector polarity", "OMNI2", "Russell-McPherron effect", "geomagnetic indices"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Astronomy",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+plot = ["matplotlib>=3.6"]
+
+[project.scripts]
+imf-polarity = "imf_polarity.__main__:main"
+imf-polarity-gui = "imf_polarity.gui:main"
+
+[project.urls]
+Homepage = "https://github.com/amrthabit2000-bot/imf-polarity"
+Repository = "https://github.com/amrthabit2000-bot/imf-polarity"
+Issues = "https://github.com/amrthabit2000-bot/imf-polarity/issues"
+DOI = "https://doi.org/10.5281/zenodo.24443175"
+Author-ORCID = "https://orcid.org/0000-0003-3850-4936"
+
+[tool.setuptools]
+packages = ["imf_polarity"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

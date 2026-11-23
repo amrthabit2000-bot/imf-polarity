@@ -1,0 +1,44 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: ${{ matrix.os }} / Python ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+    env:
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install the package with test and plot extras
+        run: python -m pip install ".[test,plot]"
+      - name: Run the tests (no network access needed)
+        run: python -m pytest -q
+
+  minimum-versions:
+    name: oldest supported dependencies
+    runs-on: ubuntu-latest
+    env:
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+      - name: Install the lowest dependency versions allowed by pyproject.toml
+        run: |
+          python -m pip install "numpy==1.23.5" "pandas==1.5.3" "requests==2.25.1" "openpyxl==3.1.0" "matplotlib==3.6.3" pytest
+          python -m pip install --no-deps .
+      - name: Run the tests
+        run: python -m pytest -q
